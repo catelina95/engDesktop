@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 
 interface GlobalState {
     curTheme: 'light' | 'dark';
@@ -7,11 +7,11 @@ interface GlobalState {
     toggleCollapsed: () => void;
 }
 
-const useGlobalStore = create<GlobalState>((set) => ({
+const globalStore = create<GlobalState>((set) => ({
     curTheme: 'dark',
     toggleTheme: () => set((state) => ({ curTheme: state.curTheme === 'light' ? 'dark' : 'light' })),
     collapsed: false,
     toggleCollapsed: () => set((state) => ({ collapsed: !state.collapsed })),
 }));
 
-export default useGlobalStore;
+export default globalStore;

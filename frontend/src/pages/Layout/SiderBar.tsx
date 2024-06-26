@@ -1,14 +1,14 @@
 import React from "react";
 import { Layout } from "antd";
-import useGlobalStore from "../../store/useGlobalStore";
+import globalStore from "@/store/globalStore";
 const { Sider } = Layout;
 
-type SiderBarProps = {
+interface SiderBarProps {
   collapsed: boolean;
-};
+}
 
 const SiderBar: React.FC<SiderBarProps> = ({ collapsed }) => {
-  const { curTheme } = useGlobalStore();
+  const { curTheme } = globalStore();
   return (
     <Sider
       theme={curTheme}

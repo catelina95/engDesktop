@@ -1,8 +1,9 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import CmLayout from "../pages/Layout";
-import Dashboard from "../pages/Dashboard";
-import NotFound from "../pages/NotFound";
+import CmLayout from "@/pages/Layout";
+import Dashboard from "@/pages/Dashboard";
+import NotFound from "@/pages/NotFound";
+import Login from "@/pages/Login";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 
   {

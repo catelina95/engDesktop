@@ -1,5 +1,5 @@
 import { ConfigProvider, theme, Button, Layout } from "antd";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -9,11 +9,12 @@ import {
 import { Outlet } from "react-router-dom";
 import SiderBar from "./SiderBar";
 const { Content } = Layout;
-import useGlobalStore from "../../store/useGlobalStore";
+import globalStore from "@/store/globalStore";
+import { useUserStore } from "@/store/userStore";
 
 const CmLayout: React.FC = () => {
-  const { curTheme, toggleTheme, collapsed, toggleCollapsed } =
-    useGlobalStore();
+  const { curTheme, toggleTheme, collapsed, toggleCollapsed } = globalStore();
+  const { user, getUserInfo } = useUserStore();
 
   const customTheme = useMemo(() => {
     return {
@@ -30,6 +31,10 @@ const CmLayout: React.FC = () => {
     [curTheme],
   );
 
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
   return (
     <ConfigProvider theme={customTheme}>
       <Layout style={{ height: "100vh" }}>
@@ -43,6 +48,7 @@ const CmLayout: React.FC = () => {
             />
 
             <div className="cursor-pointer" onClick={toggleTheme}>
+              <span>{user?.username}</span>
               {curTheme === "dark" ? (
                 <MoonFilled style={iconStyle} />
               ) : (
